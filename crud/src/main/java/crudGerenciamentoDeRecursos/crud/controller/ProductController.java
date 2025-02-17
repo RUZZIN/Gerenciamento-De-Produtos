@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 @RequestMapping("/api/products")
 @AllArgsConstructor
 public class ProductController {
-    
+///teste    
     private final ProductService productService;
 
     @GetMapping
