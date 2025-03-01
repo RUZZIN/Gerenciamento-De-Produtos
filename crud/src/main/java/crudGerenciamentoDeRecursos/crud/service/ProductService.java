@@ -8,10 +8,13 @@ import crudGerenciamentoDeRecursos.crud.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class ProductService {
     
     private final ProductRepository productRepository;
+    
+	public ProductService(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
     public List<Product> findAll() {
         return productRepository.findAll();

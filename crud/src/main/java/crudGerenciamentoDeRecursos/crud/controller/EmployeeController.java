@@ -3,9 +3,12 @@ package crudGerenciamentoDeRecursos.crud.controller;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +26,15 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/employees")
 public class EmployeeController {
     
-    private final EmployeeService employeeService;
+	@Autowired
+	private EmployeeService employeeService;
 
     @GetMapping
     public ResponseEntity<List<Employee>> findAll() {
         List<Employee> employees = employeeService.findAll();
+        if (employees.isEmpty()) {
+        	return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(employees);
     }
 
@@ -57,5 +64,11 @@ public class EmployeeController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    /** Tratamento de Exceções Globais */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }
