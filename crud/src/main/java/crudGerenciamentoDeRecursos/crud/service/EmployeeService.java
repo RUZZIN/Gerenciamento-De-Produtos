@@ -8,13 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import crudGerenciamentoDeRecursos.crud.model.Employee;
 import crudGerenciamentoDeRecursos.crud.repository.EmployeeRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class EmployeeService {
     
     private final EmployeeRepository employeeRepository;
+    
+	public EmployeeService(EmployeeRepository employeeRepository) {
+		this.employeeRepository = employeeRepository;
+	}
 
     public List<Employee> findAll() {
         return employeeRepository.findAll();
@@ -50,4 +52,6 @@ public class EmployeeService {
         Employee existingEmployee = findById(id); // Verifica se existe antes de deletar
         employeeRepository.delete(existingEmployee);
     }
+    
+    
 }
