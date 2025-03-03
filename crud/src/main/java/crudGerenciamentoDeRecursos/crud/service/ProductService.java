@@ -1,11 +1,9 @@
 package crudGerenciamentoDeRecursos.crud.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import crudGerenciamentoDeRecursos.crud.model.Product;
 import crudGerenciamentoDeRecursos.crud.repository.ProductRepository;
-import lombok.AllArgsConstructor;
 
 @Service
 public class ProductService {

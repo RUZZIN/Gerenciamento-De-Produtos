@@ -25,12 +25,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @AllArgsConstructor
 public class ProductController {
  
-    private final ProductService productService;
-
-    
     @Autowired
-    private ProductService productService;
-
+    private final ProductService productService;
 
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {
